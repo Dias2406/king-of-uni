@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Hello Everyone</h1>
+    <p class="lead">This is sone example overview text</p>
+</div>
+
+<div class="container">
+    <div class="d-flex flex-column">
+        <h3>Registered Users: </h3>
+        {% for account in accounts %}
+            <p>{{account}}</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+    
+
+
+
+{% endblock content %}
