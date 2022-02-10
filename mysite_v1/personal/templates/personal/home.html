@@ -8,10 +8,11 @@
 
 <div class="container">
     <div class="d-flex flex-column">
-        <h3>Registered Users: </h3>
-        {% for account in accounts %}
-            <p>{{account}}</p>
-        {% endfor %}
+        <h3>User Info: </h3>
+        {% if request.user.is_authenticated %}
+        <p>Username: {{request.user.username}} </p>
+        <p>Email: {{request.user.email}} </p>
+        {% endif %}
     </div>
 </div>
 
