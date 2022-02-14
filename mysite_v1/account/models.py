@@ -1,5 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
+def validate_email(email):
+    host = "@exeter.ac.uk"
+    if host not in email:
+        raise ValidationError(
+            _('Use your student email -- %(host)s'),
+            params={'host': host},
+        )
 
 
 # Create your models here.
@@ -33,7 +43,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
 class Account(AbstractBaseUser):
-    email                   = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    email                   = models.EmailField(verbose_name="email", max_length=60, unique=True, validators=[validate_email])
     username                = models.CharField(max_length=30, unique=True)
     date_joined             = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login              = models.DateTimeField(verbose_name='last login', auto_now_add=True)
