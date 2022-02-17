@@ -25,6 +25,9 @@ from account.views import (
     logout_view,
     login_view,
     account_view,
+)
+
+from game.views import (
     game_keeper_view,
 )
 

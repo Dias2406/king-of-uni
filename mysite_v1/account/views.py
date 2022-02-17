@@ -3,8 +3,6 @@ from django.contrib.auth import login, authenticate, logout
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 
 # Create your views here.
-def game_keeper_view(request):
-    return render(request, 'account/game_keeper.html', {})
 
 def registration_view(request):
     context = {}

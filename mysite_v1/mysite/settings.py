@@ -37,6 +37,7 @@ if DEBUG:
 INSTALLED_APPS = [
     'personal.apps.PersonalConfig',
     'account.apps.AccountConfig',
+    'game.apps.GameConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
