@@ -3,6 +3,9 @@ from django.contrib.auth import login, authenticate, logout
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 
 # Create your views here.
+def game_keeper_view(request):
+    return render(request, 'account/game_keeper.html', {})
+
 def registration_view(request):
     context = {}
     if request.POST:
@@ -40,10 +43,14 @@ def login_view(request):
             email = request.POST['email']
             password = request.POST['password']
             user = authenticate(email=email, password=password)
-
-            if user:
-                login(request, user)
-                return redirect("home")
+            if "is_gameKeeper" in request.POST:
+                if user and user.is_gameKeeper:
+                    login(request, user)
+                    return redirect("game_keeper")
+            else:
+                if user:
+                    login(request, user)
+                    return redirect("home")
 
     else:
         form = AccountAuthenticationForm()
