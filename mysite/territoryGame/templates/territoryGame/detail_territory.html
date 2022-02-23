@@ -48,8 +48,8 @@
 
 
 				<!-- Submit btn -->
-				<button class="submit-button btn btn-lg btn-primary btn-block" type="submit" name="showLocation">Show my location</button>
-				<button class="submit-button btn btn-lg btn-primary btn-block" type="submit" name="capture">Capture</button>
+				<button class="submit-button btn btn-lg btn-primary btn-block" type="submit" name="showLocation" id="location" onclick="unlockButton();" disabled>Show my location</button>
+				<button class="submit-button btn btn-lg btn-primary btn-block" type="submit" name="capture" id="capture" {% if not enable %} disabled {%endif%}>Capture</button>
 			</form>	
 		</div>
 	</div>
@@ -66,8 +66,7 @@
 			  navigator.geolocation.getCurrentPosition(function(position) {
 					x.value = position.coords.latitude;
 					y.value = position.coords.longitude;
-					demo.innerHTML = "Latitude: " + position.coords.latitude + 
-				   "<br>Longitude: " + position.coords.longitude;
+					document.getElementById("location").disabled = false;
 			  });
 		  } else {
 			  alert("Sorry, your browser does not support HTML5 geolocation.");
