@@ -13,16 +13,21 @@ class RegistrationForm(UserCreationForm):
 
 class AccountAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    is_gameKeeper = forms.BooleanField(required=False)
 
     class Meta:
         model = Account
-        fields = ('email', 'password')
+        fields = ('email', 'password', 'is_gameKeeper')
         
     def clean(self):
         if self.is_valid():
             email = self.cleaned_data['email']
             password = self.cleaned_data['password']
-            if not authenticate(email=email, password=password):
+            is_gameKeeper = self.cleaned_data['is_gameKeeper']
+            user = authenticate(email=email, password=password)
+            if user and is_gameKeeper and not user.is_gameKeeper:
+                raise forms.ValidationError("Your account does not have Gmae Keeper privilages")
+            if not user:
                raise forms.ValidationError("Invalid login")
 
 class AccountUpdateForm(forms.ModelForm):
