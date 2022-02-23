@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style type="text/css">
+    .buildings{
+      max-width: 500px;
+      width: 100%;
+      margin: auto;
+    }
+  </style>
+
+{% if request.user.is_authenticated %}
+<div class="container mt-4 p-4">
+    <div class="row">
+      <div class="buildings">
+        <h3 class="mb-3 font-weight-normal">Territories:</h3>
+        {% if buildings %}
+          <ul class="list-group">
+          {% for building in buildings %}
+            {% if building.is_active %}
+            <a href="{% url 'game_keeper:detail' building.slug %}" style="text-decoration: none; color: chartreuse;">
+              <li class="list-group-item">{{building}}</li></a>
+            {% else %}
+            <a href="{% url 'game_keeper:detail' building.slug %}" style="text-decoration: none; color: crimson;">
+              <li class="list-group-item">{{building}}</li></a>
+            {% endif %}
+          {% endfor %}
+          </ul>
+        {% else %}
+          <p>You have no Territories. Create a territory <a href="{% url 'game_keeper:create' %}">here</a>.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+<a href="{% url 'game_keeper:create' %}">Create new territory</a>
+
+{% endif %}
+{% endblock content %}

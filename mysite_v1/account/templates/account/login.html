@@ -43,6 +43,10 @@
 
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
+    <input type="hidden" id="latitude" name="latitude" value="">
+    <input type="hidden" id="longitude" name="longitude" value="">
+    <p id="demo"></p>
+
     <label><input type="checkbox" name="is_gameKeeper"> Login as Game Keeper</label>
 
     {% for field in login_form %} 
@@ -65,5 +69,7 @@
 <div class="d-flex flex-column">
   <a class="m-auto" href="{% url 'password_reset' %}">Reset Password</a>
 </div>
+
+
 
 {% endblock content %}

@@ -6,7 +6,7 @@
        
         {% if request.user.is_authenticated %}
         <h3>Map: </h3>
-
+            {{map | safe}}
 
         {% endif %}
     </div>

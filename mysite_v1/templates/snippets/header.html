@@ -39,13 +39,15 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         <a class="p-2 text-dark" href="{% url 'home' %}">Home</a> 
         <a class="p-2 text-dark" href="#">Rules</a> 
         <a class="p-2 text-dark" href="#">Teams</a> 
-        <a class="p-2 text-dark" href="{% url 'game_keeper' %}">Game settings</a> 
+        <a class="p-2 text-dark" href="{% url 'territory_game:territories' %}">Territories</a>
+        <a class="p-2 text-dark" href="{% url 'game_keeper:settings' %}">Game settings</a> 
         <a class="p-2 text-dark" href = "{% url 'account' %}">Account</a> 
         <a class="p-2 text-dark" href = "{% url 'logout' %}">Logout</a>
       {% else %}
         <a class="p-2 text-dark" href="{% url 'home' %}">Home</a> 
         <a class="p-2 text-dark" href="#">Rules</a> 
         <a class="p-2 text-dark" href="#">Teams</a> 
+        <a class="p-2 text-dark" href="{% url 'territory_game:territories' %}">Territories</a>
         <a class="p-2 text-dark" href = "{% url 'account' %}">Account</a> 
         <a class="p-2 text-dark" href = "{% url 'logout' %}">Logout</a>
       {% endif %}
@@ -56,6 +58,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     {% endif %}
   </nav>
 </div>
+
 
 
 

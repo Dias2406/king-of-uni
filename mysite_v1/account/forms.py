@@ -1,3 +1,4 @@
+from email.policy import default
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
@@ -9,7 +10,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = Account
-        fields = ("email", "username", "password1", "password2")
+        fields = ("email", "username", "latitude", "longitude", "password1", "password2")
 
 class AccountAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -25,7 +26,7 @@ class AccountAuthenticationForm(forms.ModelForm):
             password = self.cleaned_data['password']
             is_gameKeeper = self.cleaned_data['is_gameKeeper']
             user = authenticate(email=email, password=password)
-            if user and is_gameKeeper and not user.is_gameKeeper:
+            if is_gameKeeper and not user.is_gameKeeper:
                 raise forms.ValidationError("Your account does not have Gmae Keeper privilages")
             if not user:
                raise forms.ValidationError("Invalid login")
