@@ -74,7 +74,7 @@ def detail_territory_view(request, slug):
             #draw line between user and building
             line = folium.PolyLine(locations = [pointA, pointB], weight=2, clolor='red')
             map.add_child(line)
-            if distance < 200:
+            if distance < 2000:
                 context['enable'] = True
                 messages.success(request, 'You can capture the territory') 
             else:
@@ -94,6 +94,7 @@ def detail_territory_view(request, slug):
                 obj.territory_name = territory_name
                 obj.save()
                 form = CreateTerritoryCaptureForm
+                user.score += 10
                 return redirect('territory_game:territories')
         else:
             messages.error(request, 'Territory is already captured')

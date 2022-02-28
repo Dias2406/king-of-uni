@@ -18,3 +18,6 @@ def home_screen_view(request):
 
 
     return render(request, "personal/home.html", context)
+
+def rules_screen_view(request):
+    return render(request,"personal/rules.html")

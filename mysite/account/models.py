@@ -54,6 +54,7 @@ class Account(AbstractBaseUser):
     is_superuser            = models.BooleanField(default=False)
     latitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
     longitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
+    score                   = models.DecimalField(max_digits=7,decimal_places=0, default=0)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', ]
@@ -68,5 +69,3 @@ class Account(AbstractBaseUser):
     
     def has_module_perms(self, app_label):
         return True
-
-    
