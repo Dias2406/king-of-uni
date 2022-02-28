@@ -12,7 +12,7 @@ def home_screen_view(request):
             folium.Marker(location = [building.latitude, building.longitude],
                         tooltip='Click for the name', popup=building.name).add_to(map)
     map = map._repr_html_()
-    accounts = Account.objects.all()
+    accounts = Account.objects.all().order_by('-score')
     context['accounts'] = accounts
     context['map'] = map
 

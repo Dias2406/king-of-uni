@@ -83,21 +83,22 @@ def detail_territory_view(request, slug):
 
     if 'capture' in request.POST:
         form = CreateTerritoryCaptureForm(request.POST)
-        if not building.is_captured:
-            if form.is_valid():
-                building.is_captured = True
-                building.save()
-                obj = form.save(commit=False)
-                username = Account.objects.filter(username = request.user.username).first()
-                obj.username = username
-                territory_name = building
-                obj.territory_name = territory_name
-                obj.save()
-                form = CreateTerritoryCaptureForm
-                user.score += 10
-                return redirect('territory_game:territories')
-        else:
-            messages.error(request, 'Territory is already captured')
+        #if not building.is_captured:
+        if form.is_valid():
+            building.is_captured = True
+            building.save()
+            obj = form.save(commit=False)
+            username = Account.objects.filter(username = request.user.username).first()
+            obj.username = username
+            territory_name = building
+            obj.territory_name = territory_name
+            obj.save()
+            form = CreateTerritoryCaptureForm
+            user.score += 10
+            user.save()
+            return redirect('territory_game:territories')
+        #else:
+            #messages.error(request, 'Territory is already captured')
     else:
         form = CreateTerritoryCaptureForm()      
         
