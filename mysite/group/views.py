@@ -25,16 +25,31 @@ def join_group(request):
     context = {
 
     }
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('login')
     #TODO - seems to have no effect not sure why
+    groups = Group.objects.all()
     if (request.POST == True):
         print(request.GET['name'])
         form = JoinGroup(request.POST)
         if form.is_valid():
-            Group, created = Group.objects.get_or_create(
-                request.GET['name'],
-                defaults = None
-            )
+            # my comments Dias
+            group_name = request.POST['belongs_to_group']
+            if group_name in groups:
+                user.belongs_to_group = group_name
+                user.save()
+                #do not need below code ____
+                #Group, created = Group.objects.get_or_create(
+                    #request.GET['name'],
+                   # defaults = None
+               # )
+            else:
+                messages.error(request, 'No such group')
+     else:
+        form = JoinGroup()
         
+    context['form'] = form
     return render(request, 'group/group.html', context)
 
 
