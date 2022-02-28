@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+
+        <div>
+        
+        <p>Your Team: {{user.belongs_to_group}}</p>
+
+        <p>Join a group: </p>
+        <form action="join_group.html" method="post">
+            {% csrf_token %}
+            <label for="group_name">Group name: </label>
+            <input id="group_name" type="text" name="group_name"> <!-- got rid of value=""  -->
+            <input type="submit" value="Join">
+        </form>
+
+        </div>
+
+    {% else %} 
+
+        <p>Please Log-in or Sign Up</p>
+
+    {% endif %}
+
+{% endblock content %}

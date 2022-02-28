@@ -1,7 +1,9 @@
+from unicodedata import name
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from group.models import Group
 
 def validate_email(email):
     host = "@exeter.ac.uk"
@@ -54,7 +56,9 @@ class Account(AbstractBaseUser):
     is_superuser            = models.BooleanField(default=False)
     latitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
     longitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
+    belongs_to_group        = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL)
 
+ 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', ]
 

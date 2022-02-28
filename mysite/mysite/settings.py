@@ -35,6 +35,7 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
+    'group.apps.GroupConfig',
     'personal.apps.PersonalConfig',
     'account.apps.AccountConfig',
     'gameKeeper.apps.GameConfig',
