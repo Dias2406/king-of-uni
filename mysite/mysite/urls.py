@@ -42,6 +42,7 @@ urlpatterns = [
     path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
     path('game_keeper/', include('gameKeeper.urls', 'game_keeper')),
     path('territory_game/', include('territoryGame.urls', 'territory_game')),
+    path('group/', include('group.urls', 'group')),
 
 
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), 

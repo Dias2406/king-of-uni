@@ -1,7 +1,9 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from group.models import Group
 
 def validate_email(email):
     host = "@exeter.ac.uk"
@@ -52,9 +54,11 @@ class Account(AbstractBaseUser):
     is_active               = models.BooleanField(default=True)
     is_staff                = models.BooleanField(default=False)
     is_superuser            = models.BooleanField(default=False)
+    is_inTeam               = models.BooleanField(default=False)
     latitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
     longitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
     score                   = models.DecimalField(max_digits=7,decimal_places=0, default=0)
+    belongs_to_group        = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', ]

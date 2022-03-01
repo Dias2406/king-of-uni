@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'gameKeeper.apps.GameConfig',
     'territoryGame',
+    'group',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
