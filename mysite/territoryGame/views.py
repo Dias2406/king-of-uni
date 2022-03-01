@@ -46,7 +46,7 @@ def detail_territory_view(request, slug):
     
     #building marker
     folium.Marker(location = [building_latitude, building_longitude],
-                    tooltip='Click for the name', popup=building.name,
+                    tooltip='Click for the name', popup=building.buildingInfo(),
                     icon=folium.Icon(color='blue',icon='info-sign')).add_to(map)
                     
 
@@ -94,6 +94,8 @@ def detail_territory_view(request, slug):
             obj.territory_name = territory_name
             obj.save()
             form = CreateTerritoryCaptureForm
+            building.holder = user.username
+            building.save()
             user.score += 10
             user.save()
             return redirect('territory_game:territories')
