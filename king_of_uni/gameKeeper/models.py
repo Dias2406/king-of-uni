@@ -13,11 +13,17 @@ class Building(models.Model):
     longitude 				= models.DecimalField(max_digits=10, decimal_places=5, null=False, blank=False)
     is_active               = models.BooleanField(default=False)
     is_captured             = models.BooleanField(default=False)
+    holder                  = models.CharField(max_length=50, default='Nobody')
 
     slug 					= models.SlugField(blank=True, unique=True)
 
+    def buildingInfo(self):
+        return self.name + " - held by: " + self.holder 
     def __str__(self):
 	    return self.name
+
+
+
 
 def pre_save_building_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:

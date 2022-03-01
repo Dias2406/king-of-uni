@@ -10,4 +10,4 @@ def get_zoom(distance):
     elif distance > 300  and distance <=1000:
         return 30
     else:
-        return 10
+        return 14
