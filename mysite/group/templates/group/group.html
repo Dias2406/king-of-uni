@@ -9,12 +9,13 @@
         <p>Your Team: {{user.belongs_to_group}}</p>
 
         <p>Join a group: </p>
-        <form action="join_group.html" method="post">
+        <form action="group/" method="post">
             {% csrf_token %}
             <label for="group_name">Group name: </label>
-            <input id="group_name" type="text" name="group_name"> <!-- got rid of value=""  -->
+            <input class="form" id="group_name" type="text" name="belongs_to_group"> <!-- got rid of value=""  -->
             <input type="submit" value="Join">
         </form>
+
 
         </div>
 
