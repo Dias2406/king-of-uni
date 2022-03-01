@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from group.forms import CreateGroupForm, JoinGroupForm
+from group.forms import CreateGroupForm
 from group.models import Group
 from account.models import Account
 from django.contrib import messages
