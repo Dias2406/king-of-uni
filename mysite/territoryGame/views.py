@@ -46,7 +46,7 @@ def detail_territory_view(request, slug):
     
     #building marker
     folium.Marker(location = [building_latitude, building_longitude],
-                    tooltip='Click for the name', popup=building.name,
+                    tooltip='Click for the name', popup=building.buildingInfo(),
                     icon=folium.Icon(color='blue',icon='info-sign')).add_to(map)
                     
 
@@ -74,7 +74,7 @@ def detail_territory_view(request, slug):
             #draw line between user and building
             line = folium.PolyLine(locations = [pointA, pointB], weight=2, clolor='red')
             map.add_child(line)
-            if distance < 200:
+            if distance < 2000:
                 context['enable'] = True
                 messages.success(request, 'You can capture the territory') 
             else:
@@ -83,20 +83,24 @@ def detail_territory_view(request, slug):
 
     if 'capture' in request.POST:
         form = CreateTerritoryCaptureForm(request.POST)
-        if not building.is_captured:
-            if form.is_valid():
-                building.is_captured = True
-                building.save()
-                obj = form.save(commit=False)
-                username = Account.objects.filter(username = request.user.username).first()
-                obj.username = username
-                territory_name = building
-                obj.territory_name = territory_name
-                obj.save()
-                form = CreateTerritoryCaptureForm
-                return redirect('territory_game:territories')
-        else:
-            messages.error(request, 'Territory is already captured')
+        #if not building.is_captured:
+        if form.is_valid():
+            building.is_captured = True
+            building.save()
+            obj = form.save(commit=False)
+            username = Account.objects.filter(username = request.user.username).first()
+            obj.username = username
+            territory_name = building
+            obj.territory_name = territory_name
+            obj.save()
+            form = CreateTerritoryCaptureForm
+            building.holder = user.username
+            building.save()
+            user.score += 10
+            user.save()
+            return redirect('territory_game:territories')
+        #else:
+            #messages.error(request, 'Territory is already captured')
     else:
         form = CreateTerritoryCaptureForm()      
         
