@@ -35,6 +35,19 @@
                     <label for="id_longitute">Longitutde</label>
                     <input class="form-control" type="text" name="longitude" id="id_longitute" placeholder="Longitutde" required autofocus>
                 </div>
+                {% for field in form %} 
+                <p> 
+                    {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                </p>
+                {% endfor %}
+        
+                {% if form.non_field_errors %}
+                <div style="color:red">
+                        <p>{{form.non_field_errors}}</p>
+                </div>
+                {% endif %}
   
                   <!-- Submit btn -->
                   <button class="submit-button btn btn-lg btn-primary btn-block" type="submit">Add</button>

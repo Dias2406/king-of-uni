@@ -33,7 +33,7 @@ def create_building_view(request):
     if form.is_valid():
         form.save()
         form = CreateBuildingForm()
-        return redirect('settings')
+        return redirect('game_keeper:settings')
     context['form'] = form
     return render(request, 'game_keeper/create_building.html', context)
 
