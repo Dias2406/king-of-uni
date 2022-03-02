@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from group.models import Group
 
-__author__ = "Jakupov Dias"
+__author__ = "Jakupov Dias, Edward Calonghi (edited slightly)"
 
 def validate_email(email):
     """Validates that email is in valid format (University email)"""
