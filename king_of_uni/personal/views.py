@@ -7,14 +7,17 @@ import folium
 def home_screen_view(request):
     context = {}
     buildings = Building.objects.all()
+    #foliun map modificatiom
     map = folium.Map(location = [50.738099451637, -3.53507522602482], zoom_start = 16)
     for building in buildings:
         if building.is_active:
             if not building.is_captured:
+                #not captured building marker
                 folium.Marker(location = [building.latitude, building.longitude],
                             tooltip='Click for the name', popup=building.name + ' is not captured',
                             icon=folium.Icon(color='green',icon='info-sign')).add_to(map)
             else:
+                #captured building marker
                 folium.Marker(location = [building.latitude, building.longitude],
                 tooltip='Click for the name', popup=building.name + ' is captured by ' + building.holder,
                 icon=folium.Icon(color='red',icon='info-sign')).add_to(map)
