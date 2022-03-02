@@ -1,8 +1,14 @@
+"""
+Provides views for home page and rules
+"""
 from distutils.command.build import build
 from django.shortcuts import render
 from account.models import Account
 from gameKeeper.models import Building
 import folium
+
+__author__ = "Jakupov Dias, Edward Calonghi"
+
 # Create your views here.
 def home_screen_view(request):
     context = {}

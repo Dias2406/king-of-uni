@@ -1,12 +1,15 @@
+"""
+Provides views for creating and joining grouos
+"""
 from django.shortcuts import render, redirect
-
-# Create your views here.
 from group.forms import CreateGroupForm
 from group.models import Group
 from account.models import Account
 from django.contrib import messages
 
+__author__ = "Joseph Cato"
 
+# Create your views here.
 def group_view(request):
     context = {}
     user = request.user
