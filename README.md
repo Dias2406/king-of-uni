@@ -11,6 +11,15 @@ In order to start using the project, you will need to activate virtual environme
 
 `source venv/bin/activate`
 ## Developper Manual:
+Before running the project you need to start Cloud SQL Auth proxy, in seperate terminal run:
+
+`./cloud_sql_proxy -instances="king-342719:europe-west2:game"=tcp:5432`
+
+And set the Project ID locally:
+
+`export GOOGLE_CLOUD_PROJECT=king-342719`
+`export USE_CLOUD_SQL_AUTH_PROXY=true`
+
 To run the app use:
 
 `python manage.py runserver`
@@ -28,5 +37,5 @@ On a web browser head to http://localhost:8000 to view the website.
 <br>
 ___
 
-**Authors: Team 18**
+**Authors: Group 18**
  
