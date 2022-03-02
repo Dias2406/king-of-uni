@@ -1,3 +1,6 @@
+"""
+Provides Views for territories, detail_territory
+"""
 from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from account.models import Account
@@ -10,10 +13,9 @@ import folium
 from geopy.distance import geodesic
 import decimal
 
+__author__ = "Jakupov Dias, Edward Calonghi"
+
 # Create your views here.
-
-
-
 def territories_view(request):
     context = {}
 

@@ -46,7 +46,7 @@ def login_view(request):
             password = request.POST['password']
 
             user = authenticate(email=email, password=password)
-
+            #сhecks if the user is a gamekeeper
             if "is_gameKeeper" in request.POST:
                 if user and user.is_gameKeeper:
                     login(request, user)
