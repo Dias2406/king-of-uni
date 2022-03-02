@@ -1,6 +1,11 @@
+"""
+Provides form for creating a Team
+"""
 from django import forms
 from group.models import Group
 from account.models import Account
+
+__author__ = "Joseph Cato"
 
 class CreateGroupForm(forms.ModelForm):
 
@@ -8,8 +13,5 @@ class CreateGroupForm(forms.ModelForm):
         model = Group
         fields = ['name']
 
-class JoinGroupForm(forms.ModelForm):
 
-    class Meta:
-        model = Account
-        fields = ['belongs_to_group']
+        

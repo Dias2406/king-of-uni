@@ -1,10 +1,11 @@
+"""
+Provides Views for registration, login, account
+"""
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 
-# Create your views here.
-def game_keeper_view(request):
-    return render(request, 'account/game_keeper.html', {})
+__author__ = "Jakupov Dias"
 
 
 def registration_view(request):
@@ -45,7 +46,7 @@ def login_view(request):
             password = request.POST['password']
 
             user = authenticate(email=email, password=password)
-
+            #сhecks if the user is a gamekeeper
             if "is_gameKeeper" in request.POST:
                 if user and user.is_gameKeeper:
                     login(request, user)

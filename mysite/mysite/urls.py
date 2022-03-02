@@ -22,7 +22,6 @@ from personal.views import (
 )
 
 from account.views import (
-    game_keeper_view,
     registration_view,
     logout_view,
     login_view,

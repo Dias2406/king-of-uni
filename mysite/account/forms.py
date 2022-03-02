@@ -1,9 +1,16 @@
+"""Provides forms for Registration, Authentication and Account Update
+Registration - form for registering new users (email, username and pasword)
+Authentication - form for validating user's credentials (email, password)
+Account Update - form for updating user's credentials (email, username, password)
+"""
 from email.policy import default
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 
 from account.models import Account
+
+__author__ = "Jakupov Dias"
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60, help_text="Required. Add a valid email adress")

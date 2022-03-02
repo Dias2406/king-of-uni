@@ -37,9 +37,6 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     {% if request.user.is_authenticated %}
       {% if request.user.is_gameKeeper %}
         <a class="p-2 text-dark" href="{% url 'home' %}">Home</a> 
-        <a class="p-2 text-dark" href="{% url 'rules' %}">Rules</a> 
-        <a class="p-2 text-dark" href="{% url 'group:group_info' %}">Teams</a> 
-        <a class="p-2 text-dark" href="{% url 'territory_game:territories' %}">Territories</a>
         <a class="p-2 text-dark" href="{% url 'game_keeper:settings' %}">Game settings</a> 
         <a class="p-2 text-dark" href = "{% url 'account' %}">Account</a> 
         <a class="p-2 text-dark" href = "{% url 'logout' %}">Logout</a>

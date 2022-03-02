@@ -1,11 +1,16 @@
-from pyexpat import model
+"""
+Provides model for Account
+"""
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from group.models import Group
 
+__author__ = "Jakupov Dias, Edward Calonghi (edited slightly)"
+
 def validate_email(email):
+    """Validates that email is in valid format (University email)"""
     host = "@exeter.ac.uk"
     if host not in email:
         raise ValidationError(
@@ -13,8 +18,6 @@ def validate_email(email):
             params={'host': host},
         )
 
-
-# Create your models here.
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         if not email:
@@ -73,3 +76,5 @@ class Account(AbstractBaseUser):
     
     def has_module_perms(self, app_label):
         return True
+
+    

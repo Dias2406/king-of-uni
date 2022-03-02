@@ -2,9 +2,7 @@
 <html>
 
 <head>
-    <title>My site</title>
-    {% load static %}
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title>King of Uni</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,12 +12,16 @@
 
 <body>
 
+
     <!-- Body -->
     <style type="text/css">
         .main{
             min-height: 100vh;
             height: 100%;
         }
+        .cover {
+        padding: 0 1.5rem;
+      }
     </style>
     <div class="main">
         {% block content %}

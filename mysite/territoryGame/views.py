@@ -1,3 +1,6 @@
+"""
+Provides Views for territories, detail_territory
+"""
 from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from account.models import Account
@@ -10,10 +13,9 @@ import folium
 from geopy.distance import geodesic
 import decimal
 
+__author__ = "Jakupov Dias, Edward Calonghi"
+
 # Create your views here.
-
-
-
 def territories_view(request):
     context = {}
 
@@ -69,12 +71,12 @@ def detail_territory_view(request, slug):
                     icon=folium.Icon(color='blue',icon='info-sign')).add_to(map)
             #user marker
             folium.Marker(location = [latitude, longitude],
-                    tooltip='Click for the name', popup="Distance to " + building.name + " is " + str(distance),
+                    tooltip='Click for the name', popup="Distance to " + building.name + " is " + str(distance) + "m",
                     icon=folium.Icon(color='red', icon='cloud')).add_to(map)
             #draw line between user and building
             line = folium.PolyLine(locations = [pointA, pointB], weight=2, clolor='red')
             map.add_child(line)
-            if distance < 2000:
+            if distance < 200:
                 context['enable'] = True
                 messages.success(request, 'You can capture the territory') 
             else:

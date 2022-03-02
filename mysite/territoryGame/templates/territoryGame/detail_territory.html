@@ -60,18 +60,30 @@
 	var x = document.getElementById("latitude");
 	var y = document.getElementById("longitude");
 	var demo = document.getElementById("demo");
-  
-	(function () {
-		  if(navigator.geolocation) {
-			  navigator.geolocation.getCurrentPosition(function(position) {
-					x.value = position.coords.latitude;
-					y.value = position.coords.longitude;
-					document.getElementById("location").disabled = false;
-			  });
-		  } else {
-			  alert("Sorry, your browser does not support HTML5 geolocation.");
-		  }
-	  })()
+
+	function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+		alert("Sorry, your browser does not support HTML5 geolocation.");
+    }
+	}
+
+	function showPosition(position) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			x.value = position.coords.latitude;
+			y.value = position.coords.longitude;
+		    document.getElementById("location").disabled = false;
+		});
+	}	
+	try {
+		window.onload=getLocation;
+	}
+	catch(err) {
+  		alert(err.message);
+	}
+
+
   </script>
 
 {% endblock content %}

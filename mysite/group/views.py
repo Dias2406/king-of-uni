@@ -1,12 +1,15 @@
+"""
+Provides views for creating and joining grouos
+"""
 from django.shortcuts import render, redirect
-
-# Create your views here.
-from group.forms import CreateGroupForm, JoinGroupForm
+from group.forms import CreateGroupForm
 from group.models import Group
 from account.models import Account
 from django.contrib import messages
 
+__author__ = "Joseph Cato"
 
+# Create your views here.
 def group_view(request):
     context = {}
     user = request.user
@@ -43,12 +46,9 @@ def join_group_view(request):
         return redirect('login')
     
     if request.POST:
-        print("POST")
-        print("is valid")
         try:      
             group_name = request.POST['belongs_to_group']
             group = Group.objects.get(name=group_name)
-            print(group)
             user.belongs_to_group = group
             user.is_inTeam = True
             user.save()
