@@ -14,4 +14,4 @@ class TerritoryCapture(models.Model):
     username            = models.ForeignKey(Account, verbose_name="Users", default = 0, on_delete=models.SET_DEFAULT)
 
     def __str__(self):
-        return self.comment
+        return self.territory_name + ": " + self.username  
