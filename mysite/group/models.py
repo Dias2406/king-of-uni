@@ -7,7 +7,7 @@ __author__ = "Joseph Cato"
 
 # Create your models here.
 class Group(models.Model):
-    name = models.CharField(max_length=50,  null=False, blank=False, unique=True)
+    name = models.CharField(max_length=100,  null=False, blank=False, unique=True)
     date_created = models.DateTimeField(verbose_name="date created" , auto_now_add=True) 
     point_total = models.IntegerField(default=0)
 

@@ -61,7 +61,7 @@ class Account(AbstractBaseUser):
     latitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
     longitude 				= models.DecimalField(max_digits=20, decimal_places=15, default = 0, null=True, blank=True)
     score                   = models.DecimalField(max_digits=7,decimal_places=0, default=0)
-    belongs_to_group        = models.ForeignKey(Group, null=True, on_delete=models.SET_NULL)
+    belongs_to_group        = models.ForeignKey(Group, null=True, default=None, on_delete=models.SET_DEFAULT)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', ]
