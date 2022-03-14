@@ -17,11 +17,23 @@ def group_view(request):
         return redirect('login')
     
     group = user.belongs_to_group
-    group_members = Account.objects.filter(belongs_to_group=group)
+    group_members = Account.objects.filter(belongs_to_group=group).order_by('-score')
     context['members'] = group_members
 
 
     return render(request, 'group/group.html', context)
+
+def groups_list_view(request):
+    context = {}
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('login')
+    
+    groups = Group.objects.all()
+    context['groups'] = groups
+
+
+    return render(request, 'group/groups_list.html', context)
 
 def create_group_view(request):
     context = {}
@@ -35,12 +47,13 @@ def create_group_view(request):
     if form.is_valid():
         form.save()
         form = CreateGroupForm()
-        return redirect('group:group_info')
+        return redirect('game_keeper:groups_list')
     context['form'] = form
     return render(request, 'group/create_group.html', context)
 
 def join_group_view(request):
     context = {}
+    groups = Group.objects.all()
     user = request.user
     if not user.is_authenticated:
         return redirect('login')
@@ -55,6 +68,15 @@ def join_group_view(request):
             return redirect('group:group_info')
         except Group.DoesNotExist:
             messages.error(request, 'No such group') 
+    else:
+        context['groups'] = groups
 
 
     return render(request, 'group/join_group.html', context)
+
+def leave_group_view(request):
+    user = request.user
+    user.is_inTeam = False
+    user.belongs_to_group = None
+    user.save()
+    return redirect('group:group_info')

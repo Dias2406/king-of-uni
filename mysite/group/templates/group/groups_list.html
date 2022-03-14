@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style type="text/css">
+    .buildings{
+      max-width: 500px;
+      width: 100%;
+      margin: auto;
+    }
+  </style>
+
+{% if request.user.is_authenticated %}
+<div class="container mt-4 p-4">
+    <div class="row">
+      <div class="buildings">
+        {% if groups %}
+        <h3 class="mb-3 font-weight-normal">Groups</h3>
+        <ul class="list-group">
+          {% for group in groups %}
+            <li class="list-group-item">{{group.name}}</li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          <p>No teams available</p>
+        {% endif %}
+        <a href="{% url 'game_keeper:create_group' %}">Create new team</a>
+      </div>
+    </div>
+  </div>
+
+
+{% endif %}
+{% endblock content %}

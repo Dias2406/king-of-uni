@@ -17,13 +17,16 @@
   
   <div class="container">
       <div class="row">
-          <div class="col-lg-7 offset-lg-1">
+          <div class="col-lg-8 offset-lg-2">
               <form class="create-form" method="post">{% csrf_token %}
   
              
                 <div class="form-group">
-                    <label for="id_title">Name of the Group</label>
-                    <input class="form-control" type="text" name="belongs_to_group" id="id_name" placeholder="Name of the Group" required autofocus>
+                    <select class="form-control" name="belongs_to_group" id="cars">
+                        {% for group in groups %}
+                        <option value="{{group.name}}">{{group.name}}</option>
+                        {% endfor %}
+                      </select>
                 </div>
                 {% for message in messages %}
 				{% if message.tags == "error" %}

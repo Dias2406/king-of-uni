@@ -14,7 +14,6 @@ class Building(models.Model):
     is_active               = models.BooleanField(default=False)
     is_captured             = models.BooleanField(default=False)
     holder                  = models.CharField(max_length=50, default='Nobody')
-
     slug 					= models.SlugField(blank=True, unique=True)
 
     def buildingInfo(self):
