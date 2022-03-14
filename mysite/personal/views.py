@@ -25,7 +25,7 @@ def home_screen_view(request):
             else:
                 #captured building marker
                 folium.Marker(location = [building.latitude, building.longitude],
-                tooltip='Click for the name', popup=building.name + ' is captured by ' + building.holder,
+                tooltip='Click for the name', popup=building.name + ' is captured by "' + building.holder + '" team',
                 icon=folium.Icon(color='red',icon='info-sign')).add_to(map)
 
     map = map._repr_html_()
