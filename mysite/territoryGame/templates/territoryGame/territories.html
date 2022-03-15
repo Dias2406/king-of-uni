@@ -19,13 +19,13 @@
             <ul class="list-group">
             {% for building in buildings %}
               {% if building.is_active %}
-              {% if building.is_captured %}
-              <a class="closeBtn" href="{% url 'territory_game:detail_territory' building.slug %}" style="text-decoration: none; color: rgb(255, 0, 0);">
-                <li class="list-group-item">{{building}} | Captured</li>
-              {% else %}
-              <a class="closeBtn" href="{% url 'territory_game:detail_territory' building.slug %}" style="text-decoration: none; color: rgb(0, 255, 149);">
-                  <li class="list-group-item">{{building}} | Not Captured</li>
-              {% endif %}
+                {% if building.is_captured %}
+                <a class="closeBtn" href="{% url 'territory_game:detail_territory' building.slug %}" style="text-decoration: none; color: rgb(255, 0, 0);">
+                  <li class="list-group-item">{{building}} | Captured</li>
+                {% else %}
+                <a class="closeBtn" href="{% url 'territory_game:detail_territory' building.slug %}" style="text-decoration: none; color: rgb(0, 255, 149);">
+                    <li class="list-group-item">{{building}} | Not Captured</li>
+                {% endif %}
               {% endif %}
             {% endfor %}
             </ul>

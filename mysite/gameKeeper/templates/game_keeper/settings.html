@@ -29,10 +29,11 @@
         {% else %}
           <p>You have no Territories. Create a territory <a href="{% url 'game_keeper:create' %}">here</a>.</p>
         {% endif %}
+        <a href="{% url 'game_keeper:create' %}">Create new territory</a>
       </div>
     </div>
   </div>
-<a href="{% url 'game_keeper:create' %}">Create new territory</a>
+
 
 {% endif %}
 {% endblock content %}

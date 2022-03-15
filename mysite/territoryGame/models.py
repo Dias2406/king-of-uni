@@ -15,4 +15,4 @@ class TerritoryCapture(models.Model):
     team                = models.ForeignKey(Group, verbose_name="Holder", null=True, default = None, on_delete=models.SET_DEFAULT)
 
     def __str__(self):
-        return self.territory_name.name + ": " + self.username.username
+        return self.territory_name.name

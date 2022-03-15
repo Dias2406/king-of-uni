@@ -10,6 +10,7 @@ class Group(models.Model):
     name = models.CharField(max_length=100,  null=False, blank=False, unique=True)
     date_created = models.DateTimeField(verbose_name="date created" , auto_now_add=True) 
     point_total = models.IntegerField(default=0)
+    color = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.name
