@@ -9,8 +9,8 @@ __author__ = "Rob Campbell, Edward Calonghi (edited slightly)"
 
 class Building(models.Model):
     name 					= models.CharField(max_length=50, null=False, blank=False, unique=True)
-    latitude 				= models.DecimalField(max_digits=10, decimal_places=5, null=False, blank=False)
-    longitude 				= models.DecimalField(max_digits=10, decimal_places=5, null=False, blank=False)
+    latitude 				= models.DecimalField(max_digits=20, decimal_places=15, null=False, blank=False)
+    longitude 				= models.DecimalField(max_digits=20, decimal_places=15, null=False, blank=False)
     is_active               = models.BooleanField(default=False)
     is_captured             = models.BooleanField(default=False)
     holder                  = models.CharField(max_length=50, default='Nobody')

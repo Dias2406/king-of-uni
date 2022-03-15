@@ -5,6 +5,7 @@ from distutils.command.build import build
 from django.shortcuts import render
 from account.models import Account
 from gameKeeper.models import Building
+from group.models import Group
 import folium
 
 __author__ = "Jakupov Dias, Edward Calonghi"
@@ -24,17 +25,20 @@ def home_screen_view(request):
                             icon=folium.Icon(color='green',icon='info-sign')).add_to(map)
             else:
                 #captured building marker
+                group = Group.objects.filter(name = building.holder).first()
                 folium.Marker(location = [building.latitude, building.longitude],
                 tooltip='Click for the name', popup=building.name + ' is captured by "' + building.holder + '" team',
-                icon=folium.Icon(color='red',icon='info-sign')).add_to(map)
+                icon=folium.Icon(color=group.color,icon='info-sign')).add_to(map)
 
     map = map._repr_html_()
-    accounts = Account.objects.all().order_by('-score')
-    context['accounts'] = accounts
     context['map'] = map
-
-
     return render(request, "personal/home.html", context)
 
 def rules_screen_view(request):
     return render(request,"personal/rules.html")
+
+def leaderboard_view(request):
+    context = {}
+    groups = Group.objects.all().order_by('-point_total')
+    context['groups'] = groups
+    return render(request, "personal/leaderboard.html", context)
