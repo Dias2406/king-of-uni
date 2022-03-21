@@ -1,10 +1,9 @@
+import imp
 from django.test import Client, TestCase, SimpleTestCase
 from django.urls import resolve, reverse
 from account.models import Account
-from territoryGame.utils import get_center_coordinates, get_zoom
 from territoryGame.views import territories_view, detail_territory_view
-from gameKeeper.models import Building
-
+from territoryGame.forms import CreateTerritoryCaptureForm, UserLocationForm
 
 __author__ = "Edward Calonghi"
 
@@ -35,10 +34,35 @@ class TestViews (TestCase):
         response2 = self.notClient.get(territory_url)
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response2.status_code, 302)
+
+
+class TestForms(TestCase):
+
+    def test_CreateTerritoryCaptureForm_data(self):
+        form = CreateTerritoryCaptureForm(data={
+            'comment': 'I am the king',
+        })
+        self.assertTrue(form.is_valid())
     
+    def test_CreateTerritoryCaptureForm_no_data(self):
+        form = CreateTerritoryCaptureForm(data={})
+        self.assertTrue(form.is_valid())
+
+    def test_UserLocationForm_data(self):
+        form = UserLocationForm(data={
+            'latitude': 1024123,
+            'longitude': 12486112,
+        })
+        self.assertFalse(form.is_valid())
+    
+    def test_UserLocationForm_no_data(self):
+        form = UserLocationForm(data={})
+        self.assertTrue(form.is_valid())
+        
     def test_detail_view(self):
         territory_url = reverse('territory_game:detail_territory', kwargs={'slug': 'into'})
         response = self.client.get(territory_url)
         response2 = self.notClient.get(territory_url)
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response2.status_code, 302)
+        
