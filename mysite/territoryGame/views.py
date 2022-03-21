@@ -97,7 +97,7 @@ def detail_territory_view(request, slug):
             building.is_captured = True
             building.holder = user.belongs_to_group.name
             building.save()
-            # adds points to user and saves data in Accaount model
+            # adds points to user and saves data in Account model
             user.score += 10
             user.save()
             # adds user points to teams points and saves data in Group Model

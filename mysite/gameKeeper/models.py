@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 
-__author__ = "Rob Campbell, Edward Calonghi (edited slightly)"
+__author__ = "Rob Campbell"
 
 class Building(models.Model):
     name 					= models.CharField(max_length=50, null=False, blank=False, unique=True)
