@@ -1,5 +1,3 @@
-import imp
-from unicodedata import name
 from django.test import SimpleTestCase, TestCase, Client
 from django.urls import reverse, resolve
 from gameKeeper.models import Building
