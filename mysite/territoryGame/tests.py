@@ -2,6 +2,7 @@ import imp
 from django.test import Client, TestCase, SimpleTestCase
 from django.urls import resolve, reverse
 from account.models import Account
+from gameKeeper.models import Building
 from territoryGame.views import territories_view, detail_territory_view
 from territoryGame.forms import CreateTerritoryCaptureForm, UserLocationForm
 
@@ -35,6 +36,13 @@ class TestViews (TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response2.status_code, 302)
 
+    def test_detail_view(self):
+        territory_url = reverse('territory_game:detail_territory', kwargs={'slug': 'into'})
+        response = self.client.get(territory_url)
+        response2 = self.notClient.get(territory_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response2.status_code, 302)
+
 
 class TestForms(TestCase):
 
@@ -58,11 +66,4 @@ class TestForms(TestCase):
     def test_UserLocationForm_no_data(self):
         form = UserLocationForm(data={})
         self.assertTrue(form.is_valid())
-        
-    def test_detail_view(self):
-        territory_url = reverse('territory_game:detail_territory', kwargs={'slug': 'into'})
-        response = self.client.get(territory_url)
-        response2 = self.notClient.get(territory_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response2.status_code, 302)
         
