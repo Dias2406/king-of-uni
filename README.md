@@ -1,4 +1,4 @@
-# King of University (Prototype)
+# King of University 
 
 *King of University is a free web application developped in Django. Players compete to capture territories around campus to earn points and reach the top of the leaderboard.*
 
@@ -27,14 +27,11 @@ To run the app use:
 On a web browser head to http://localhost:8000 to view the website.
 <br>
 
-## Future Development:
-- Implement Teams
-- Improve the scoring sytem
-- Add a team leaderboard 
-- Add more capturable locations 
-- Fine-tuning of capturable locations
-<br>
-<br>
+## Testing
+
+To run tests run bellow comand:
+
+`python manage.py test`
 ___
 
 **Authors: Group 18**
