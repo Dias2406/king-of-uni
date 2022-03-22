@@ -1,4 +1,5 @@
-import imp
+from datetime import datetime, timedelta
+import time as t
 from django.test import Client, TestCase, SimpleTestCase
 from django.urls import resolve, reverse
 from account.models import Account
@@ -67,3 +68,16 @@ class TestForms(TestCase):
         form = UserLocationForm(data={})
         self.assertTrue(form.is_valid())
         
+
+class testDateTime(SimpleTestCase):
+
+    def test_example(self):
+        capture = datetime.now()
+        t.sleep(5)
+        recapture = datetime.now()
+        elapsed = recapture - capture
+        cooldown = timedelta(seconds=10)
+        if elapsed > cooldown:
+            print ('capturable')
+        else:
+            print ('not capturable')

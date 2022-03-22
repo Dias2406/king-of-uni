@@ -1,6 +1,7 @@
 """
 Provides Views for territories, detail_territory
 """
+from warnings import catch_warnings
 from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from account.models import Account
@@ -12,6 +13,7 @@ from django.contrib import messages
 import folium
 from geopy.distance import geodesic
 import decimal
+from datetime import datetime, timedelta
 
 __author__ = "Jakupov Dias, Edward Calonghi"
 
@@ -85,28 +87,53 @@ def detail_territory_view(request, slug):
 
     if 'capture' in request.POST:
         form = CreateTerritoryCaptureForm(request.POST)
-        #if not building.is_captured:
-        if form.is_valid():
-            obj = form.save(commit=False)
-            username = Account.objects.filter(username = request.user.username).first()
-            obj.team = username.belongs_to_group
-            obj.territory_name = building
-            obj.save()
-            form = CreateTerritoryCaptureForm
-            # saves data in the Building model
-            building.is_captured = True
-            building.holder = user.belongs_to_group.name
-            building.save()
-            # adds points to user and saves data in Account model
-            user.score += 10
-            user.save()
-            # adds user points to teams points and saves data in Group Model
-            group = user.belongs_to_group
-            group.point_total += 10
-            group.save()
-            return redirect('territory_game:territories')
-        #else:
-            #messages.error(request, 'Territory is already captured')
+        # check the builidings capture date to see if it was recently captured if
+        # the building has no cature date the check is bypassed
+        try:
+            elapesed_time = datetime.now() - building.capture_date
+            cooldown = timedelta(hours=24)
+        except:
+            elapesed_time = 1
+            cooldown = 0
+        if elapesed_time > cooldown:
+            if form.is_valid():
+                obj = form.save(commit=False)
+                username = Account.objects.filter(username = request.user.username).first()
+                obj.team = username.belongs_to_group
+                obj.territory_name = building
+                obj.save()
+                form = CreateTerritoryCaptureForm
+                if str(building.holder) == str(user.belongs_to_group):
+                    # saves data in the Building model
+                    building.is_captured = True
+                    building.holder = user.belongs_to_group.name
+                    building.capture_date = datetime.now()
+                    building.streak *= 2
+                    building.save()
+                    # adds points to user and saves data in Account model
+                    user.score += 20
+                    user.save()
+                    # adds user points to teams points and saves data in Group Model
+                    group = user.belongs_to_group
+                    group.point_total += 10 * building.streak
+                    group.save()                
+                else:
+                    # saves data in the Building model
+                    building.is_captured = True
+                    building.holder = user.belongs_to_group.name
+                    building.capture_date = datetime.now()
+                    building.streak = 1
+                    building.save()
+                    # adds points to user and saves data in Account model
+                    user.score += 10
+                    user.save()
+                    # adds user points to teams points and saves data in Group Model
+                    group = user.belongs_to_group
+                    group.point_total += 10
+                    group.save()
+                return redirect('territory_game:territories')
+        else:
+            messages.error(request, 'Territory still on cooldown: '+str(cooldown - elapesed_time)+' left')
     else:
         form = CreateTerritoryCaptureForm()      
         
