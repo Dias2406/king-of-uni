@@ -1,6 +1,7 @@
 """
 Provides model for Building
 """
+from datetime import datetime, tzinfo
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
@@ -14,6 +15,7 @@ class Building(models.Model):
     is_active               = models.BooleanField(default=False)
     is_captured             = models.BooleanField(default=False)
     holder                  = models.CharField(max_length=50, default='Nobody')
+    capture_date            = models.DateTimeField(blank=True, null=True)
     slug 					= models.SlugField(blank=True, unique=True)
 
     def buildingInfo(self):
