@@ -8,3 +8,4 @@ psycopg2-binary==2.9.3
 google-cloud-secret-manager==2.8.0
 folium
 geopy
+datetime
