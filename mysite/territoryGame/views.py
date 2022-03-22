@@ -103,18 +103,34 @@ def detail_territory_view(request, slug):
                 obj.territory_name = building
                 obj.save()
                 form = CreateTerritoryCaptureForm
-                # saves data in the Building model
-                building.is_captured = True
-                building.holder = user.belongs_to_group.name
-                building.capture_date = datetime.now()
-                building.save()
-                # adds points to user and saves data in Account model
-                user.score += 10
-                user.save()
-                # adds user points to teams points and saves data in Group Model
-                group = user.belongs_to_group
-                group.point_total += 10
-                group.save()
+                if str(building.holder) == str(user.belongs_to_group):
+                    # saves data in the Building model
+                    building.is_captured = True
+                    building.holder = user.belongs_to_group.name
+                    building.capture_date = datetime.now()
+                    building.streak *= 2
+                    building.save()
+                    # adds points to user and saves data in Account model
+                    user.score += 20
+                    user.save()
+                    # adds user points to teams points and saves data in Group Model
+                    group = user.belongs_to_group
+                    group.point_total += 10 * building.streak
+                    group.save()                
+                else:
+                    # saves data in the Building model
+                    building.is_captured = True
+                    building.holder = user.belongs_to_group.name
+                    building.capture_date = datetime.now()
+                    building.streak = 1
+                    building.save()
+                    # adds points to user and saves data in Account model
+                    user.score += 10
+                    user.save()
+                    # adds user points to teams points and saves data in Group Model
+                    group = user.belongs_to_group
+                    group.point_total += 10
+                    group.save()
                 return redirect('territory_game:territories')
         else:
             messages.error(request, 'Territory still on cooldown: '+str(cooldown - elapesed_time)+' left')

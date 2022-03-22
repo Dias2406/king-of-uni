@@ -12,6 +12,7 @@ class Building(models.Model):
     name 					= models.CharField(max_length=50, null=False, blank=False, unique=True)
     latitude 				= models.DecimalField(max_digits=20, decimal_places=15, null=False, blank=False)
     longitude 				= models.DecimalField(max_digits=20, decimal_places=15, null=False, blank=False)
+    streak                  = models.DecimalField(max_digits=1,decimal_places=0, default=1)
     is_active               = models.BooleanField(default=False)
     is_captured             = models.BooleanField(default=False)
     holder                  = models.CharField(max_length=50, default='Nobody')
