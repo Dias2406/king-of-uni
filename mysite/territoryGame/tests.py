@@ -58,10 +58,10 @@ class TestForms(TestCase):
 
     def test_UserLocationForm_data(self):
         form = UserLocationForm(data={
-            'latitude': 1024123,
-            'longitude': 12486112,
+            'latitude': 10.24123,
+            'longitude': 12.486112,
         })
-        self.assertFalse(form.is_valid())
+        self.assertTrue(form.is_valid())
     
     def test_UserLocationForm_no_data(self):
         form = UserLocationForm(data={})
