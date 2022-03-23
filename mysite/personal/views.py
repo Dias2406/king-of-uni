@@ -8,7 +8,7 @@ from gameKeeper.models import Building
 from group.models import Group
 import folium
 
-__author__ = "Jakupov Dias, Edward Calonghi"
+__author__ = "Jakupov Dias, Edward Calonghi, Robert Campbell"
 
 # Create your views here.
 def home_screen_view(request):
@@ -42,3 +42,7 @@ def leaderboard_view(request):
     groups = Group.objects.all().order_by('-point_total')
     context['groups'] = groups
     return render(request, "personal/leaderboard.html", context)
+
+def privacy_policy_view(request):
+    context = {}
+    return render(request, "personal/privacy.html")

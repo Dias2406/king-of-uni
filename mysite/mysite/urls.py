@@ -20,6 +20,7 @@ from personal.views import (
     home_screen_view,
     rules_screen_view,
     leaderboard_view,
+    privacy_policy_view,
 )
 
 from account.views import (
@@ -40,6 +41,7 @@ urlpatterns = [
     path('logout/', logout_view, name="logout"),
     path('login/', login_view, name="login"),
     path('account/', account_view, name="account"),
+    path('privacy/', privacy_policy_view, name="privacy"),
     path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
     path('game_keeper/', include('gameKeeper.urls', 'game_keeper')),
     path('territory_game/', include('territoryGame.urls', 'territory_game')),
