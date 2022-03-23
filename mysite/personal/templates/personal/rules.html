@@ -2,29 +2,46 @@
 
 {% block content %}
 
-{% if request.user.is_authenticated %}
+<style type="text/css">
+    .summary{
+        -moz-transform: skew(-20deg, 0deg);
+        -webkit-transform: skew(-20deg, 0deg);
+        -o-transform: skew(-20deg, 0deg);
+        -ms-transform: skew(-20deg, 0deg);
+        transform: skew(-20deg, 0deg);
+        -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+        box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+        padding-left: 5px;
+        background: #faefbf;
+    }
+    .summary h3{
+        color: #bc2e1e;
+        margin-bottom: 0%;
+        padding-bottom: 10px;
+        text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+    }
+</style>
 
 <div class="container">
-    <h3 style="margin-top: 50px;">Aim of the Game:</h3>
-    <p>Teams compete over territories around campus; players are able to go up to building marked on the user home page map and<br>
-        capture it. Teams earn points for succesfully capturing a building and earn streaks the longer a team can keep hold of<br>
-        the building. If a team gains complete control over every territory in the University they will be crowned the kings of <br>
-        University. 
-    </p>
-    <h3 style="margin-top: 50px;">Information:</h3>
-    <ul>
-        <li>Zones will be available to capture by Gamekeepers; players can look at the map on the main menu to see where these<br>
-            capture points are.
-        </li>
-        <li>When a player wants to a capture a building they can use the check my location button in the territories screen</li>
-        <li>If the player is close enough the capture button will become available to press and the player can capture the building</li>
-        <li>Each building has a cooldown and can't be recaptured until the cooldown expires.</li>
-        <li>Players can check how long is left on a cooldown by trying to capture a territory.</li>
-        <li>Teams can earn streaks to earn high score bonuses by recapturing territories they hold at the end of a cooldown.</li>
-        <li>Point totals and game progress are tracked and compared via the leaderboard.</li>
-        <li>Players can check which team holds which buildings by clicking on the building markers on the map in the home screen</li>
+    <div class="summary">
+        <h3 style="margin-top: 50px;">Aim of the Game:</h3>
+        <p><b>Teams compete over territories around campus; players are able to go up to building marked on the user home page map and
+            capture it. Teams earn points for succesfully capturing a building and earn streaks the longer a team can keep hold of
+            the building. If a team gains complete control over every territory in the University they will be crowned the kings of
+            University.</b>
+        </p>
+    </div>
+    <h3 class="display-4" style="margin-top: 100px; text-align: center;">Features</h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Players can look at the map on the main menu to see where capture points are.</li>
+        <li class="list-group-item">When a player wants to a capture a building they can use the check my location button in the territories screen</li>
+        <li class="list-group-item">If the player is close enough the capture button will become available to press and the player can capture the building</li>
+        <li class="list-group-item">Each building has a cooldown and can't be recaptured until the cooldown expires.</li>
+        <li class="list-group-item">Players can check how long is left on a cooldown by trying to capture a territory.</li>
+        <li class="list-group-item">Teams can earn streaks to earn high score bonuses by recapturing territories they hold at the end of a cooldown.</li>
+        <li class="list-group-item">Point totals and game progress are tracked and compared via the leaderboard.</li>
+        <li class="list-group-item">Players can check which team holds which buildings by clicking on the building markers on the map in the home screen</li>
     </ul>
 </div>
-{% endif %}
 
 {% endblock content %}
