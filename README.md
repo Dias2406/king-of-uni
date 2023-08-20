@@ -34,5 +34,3 @@ To run tests run bellow comand:
 `python manage.py test`
 ___
 
-**Authors: Group 18**
- 
